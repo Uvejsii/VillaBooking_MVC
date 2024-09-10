@@ -1,0 +1,8 @@
+﻿@model IEnumerable<VillaNumber>
+
+<h1>Villa Numbers</h1>
+
+@foreach(var item in Model)
+{
+    <h5>Villa Num: <a asp-controller="VillaNumber" asp-action="Update" asp-route-villaNumber="@item.Villa_Number">@item.Villa_Number</a></h5>
+}
