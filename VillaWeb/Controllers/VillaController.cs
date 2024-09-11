@@ -55,7 +55,6 @@ namespace VillaBooking.Web.Controllers
             return View(obj);
         }
 
-
         [HttpPost]
         public IActionResult Update(Villa obj)
         {

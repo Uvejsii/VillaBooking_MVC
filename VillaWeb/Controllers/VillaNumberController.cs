@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using VillaBooking.Domain.Entities;
 using VillaBooking.Infrastructure.Data;
 
@@ -19,8 +20,16 @@ namespace VillaBooking.Web.Controllers
             return View(villas);
         }
 
-        public IActionResult Create() 
+        public IActionResult Create()
         {
+            IEnumerable<SelectListItem> list = _db.Villas.ToList().Select(v => new SelectListItem
+            {
+                Text = v.Name,
+                Value = v.Id.ToString(),
+            });
+
+            ViewBag.VillaList = list;
+
             return View();
         }
 
