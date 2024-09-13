@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using VillaBooking.Application.Common.Interfaces;
 using VillaBooking.Infrastructure.Data;
+using VillaBooking.Infrastructure.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(option =>
 option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IVillaRepository, VillaRepository>();
 
 var app = builder.Build();
 
