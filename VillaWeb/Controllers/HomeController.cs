@@ -1,21 +1,27 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using VillaBooking.Application.Common.Interfaces;
+using VillaBooking.Web.ViewModels;
 using VillaWeb.Models;
 
 namespace VillaWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IUnitOfWork _unitOfWork;
+        public HomeController(IUnitOfWork unitOfWork)
         {
-            _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+            HomeVM homeVM = new()
+            {
+                VillaList = _unitOfWork.Villa.GetAll(includeProperties: "VillaAmenity")
+            };
+
+            return View(homeVM);
         }
 
         public IActionResult Privacy()
